@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Xml2ParaTranz": {
+      "commandName": "Project",
+      "commandLineArgs": "\"C:\\Program Files (x86)\\Steam\\steamapps\\common\\Caves of Qud\\CoQ_Data\\StreamingAssets\\Base\""
+    }
+  }
+}
