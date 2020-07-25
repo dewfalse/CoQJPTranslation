@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+
 
 namespace CreateJPTranslation
 {
@@ -65,12 +67,21 @@ namespace CreateJPTranslation
                 {
                     var original = item.original;
                     var translation = item.translation;
+                    if(translation == "")
+                    {
+                        continue;
+                    }
                     //改行を\\nに置換する
                     original = original.Replace("\\n", "\r\n");
                     translation = translation.Replace("\\n", "\r\n");
 
+                    //&を&amp;に置換する
+                    original = original.Replace("&", "&amp;");
+                    translation = translation.Replace("&", "&amp;");
+
                     //ParaTranzファイルのアイテムを使って元ファイルを置換する
-                    dst_text = dst_text.Replace(original, translation);
+                    //前後に>, <をつけて置換することで誤爆を防ぐ
+                    dst_text = dst_text.Replace(">" + original + "<", ">" + translation + "<");
                 }
             }
             //置換したファイルを出力
